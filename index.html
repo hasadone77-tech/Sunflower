@@ -131,7 +131,8 @@ body::before{
     height:85%;
     background:white;
     left:7.5%;
-    top:10px;
+    top:-20px;
+    z-index:2;
     border-radius:12px;
     padding:20px;
     text-align:center;
@@ -169,6 +170,8 @@ body::before{
     z-index:50;
     padding:25px;
     animation:fade 1s;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(10px);
 }
 
 @keyframes fade{
@@ -177,11 +180,10 @@ body::before{
 }
 
 .title{
-    color:white;
+    color:#ff4f7a;
     font-size:2rem;
     margin-bottom:20px;
     text-align:center;
-    text-shadow:0 0 10px rgba(0,0,0,0.4);
     animation:float 4s ease-in-out infinite;
 }
 
@@ -216,13 +218,12 @@ body::before{
 /* TYPING */
 
 #typing-text{
-    color:white;
+    color:black;
     max-width:340px;
     text-align:center;
     line-height:1.8;
     font-size:14px;
     min-height:180px;
-    text-shadow:0 0 10px rgba(0,0,0,0.4);
 }
 
 /* GALLERY */
@@ -296,7 +297,7 @@ body::before{
 
 <!-- MUSIC -->
 <audio id="bg-music" loop>
-    <source src="Ini Abadi Perunggu.m4a" type="audio/mp4">
+    <source src="ini-abadi.mp3" type="audio/mpeg">
 </audio>
 
 <!-- HEARTS -->
@@ -388,7 +389,7 @@ envelope.addEventListener('click',()=>{
 
     music.currentTime = 33;
 
-    music.play();
+    music.play().catch(() => {});
 
     if(!opened){
 
@@ -408,7 +409,7 @@ envelope.addEventListener('click',()=>{
             origin:{y:0.6}
         });
 
-        setInterval(createLoveButton,2500);
+        setInterval(createLoveButton,7000);
 
     }
 
@@ -459,9 +460,13 @@ function startTyping(){
 
 }
 
-/* RANDOM LOVE BUTTONS */
+/* RANDOM LOVE BUTTON */
 
 function createLoveButton(){
+
+    if(document.querySelectorAll('.love-btn').length > 0){
+        return;
+    }
 
     const btn = document.createElement('button');
 
@@ -470,7 +475,7 @@ function createLoveButton(){
     const texts = [
         'I Love You 💖',
         'Sayangkuu 🤍',
-        'My bini',
+        'hi imupp',
         'Mwah 😚'
     ];
 
@@ -499,7 +504,7 @@ function createLoveButton(){
 
     setTimeout(()=>{
         btn.remove();
-    },4500);
+    },5000);
 
 }
 
