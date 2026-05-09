@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Special Gift For Mela 💌</title>
+<title>For Mela 💌</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
     --pink1:#ff758c;
     --pink2:#ff7eb3;
-    --white:#fff;
+    --white:#ffffff;
 }
 
 *{
@@ -26,7 +26,7 @@ body{
     font-family:'Poppins',sans-serif;
     height:100vh;
     overflow:hidden;
-    background:linear-gradient(135deg,var(--pink1),var(--pink2));
+    background:black;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -34,14 +34,38 @@ body{
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Glow */
+/* VIDEO BACKGROUND */
+
+#bg-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-3;
+    opacity:0;
+    transition:1.5s ease;
+}
+
+/* DARK OVERLAY */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    z-index:-2;
+    opacity:0;
+    transition:1.5s;
+}
+
+/* GLOW */
 
 body::before{
     content:'';
     position:absolute;
-    width:400px;
-    height:400px;
-    background:rgba(255,255,255,0.12);
+    width:350px;
+    height:350px;
+    background:rgba(255,255,255,0.08);
     border-radius:50%;
     filter:blur(60px);
     animation:pulse 7s infinite;
@@ -53,7 +77,7 @@ body::before{
     100%{transform:scale(1);}
 }
 
-/* Hearts */
+/* HEARTS */
 
 #heart-bg{
     position:absolute;
@@ -65,9 +89,8 @@ body::before{
 
 .heart{
     position:absolute;
-    font-size:20px;
-    animation:fall linear forwards;
     opacity:0.7;
+    animation:fall linear forwards;
     will-change:transform;
 }
 
@@ -80,15 +103,15 @@ body::before{
     }
 }
 
-/* Envelope */
+/* ENVELOPE */
 
 .envelope-wrapper{
     position:relative;
     width:300px;
     height:210px;
-    background:#fff;
+    background:white;
     border-radius:0 0 15px 15px;
-    box-shadow:0 15px 35px rgba(0,0,0,0.18);
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
     cursor:pointer;
     z-index:5;
     transition:0.4s;
@@ -109,22 +132,22 @@ body::before{
     content:'';
     position:absolute;
     top:0;
-    z-index:5;
 
     border-left:150px solid transparent;
     border-right:150px solid transparent;
-    border-top:110px solid #f3f3f3;
+    border-top:110px solid #f1f1f1;
 
     transform-origin:top;
     transition:0.8s ease;
+
+    z-index:5;
 }
 
 .envelope-wrapper.open::before{
     transform:rotateX(180deg);
-    z-index:1;
 }
 
-/* Letter */
+/* LETTER */
 
 .letter{
     position:absolute;
@@ -133,12 +156,11 @@ body::before{
     background:white;
     left:7.5%;
     top:10px;
-    border-radius:10px;
+    border-radius:12px;
     padding:20px;
     text-align:center;
-    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
     transition:0.8s;
-    z-index:2;
 }
 
 .envelope-wrapper.open .letter{
@@ -159,20 +181,18 @@ body::before{
     font-size:13px;
 }
 
-/* Secret Content */
+/* SECRET PAGE */
 
 #secret-content{
     position:fixed;
     inset:0;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
     display:none;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    z-index:100;
-    overflow-y:auto;
+    z-index:50;
     padding:25px;
-    animation:fade 0.8s;
+    animation:fade 1s;
 }
 
 @keyframes fade{
@@ -182,9 +202,10 @@ body::before{
 
 .title{
     color:white;
-    font-size:1.8rem;
+    font-size:2rem;
     margin-bottom:20px;
     text-align:center;
+    text-shadow:0 0 10px rgba(0,0,0,0.4);
     animation:float 4s ease-in-out infinite;
 }
 
@@ -197,17 +218,16 @@ body::before{
     }
 }
 
-/* Photo */
+/* PHOTO */
 
 .photo-frame{
-    width:220px;
-    height:220px;
-    padding:8px;
+    width:210px;
+    height:210px;
     background:white;
+    padding:8px;
     border-radius:18px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    margin-bottom:20px;
     transform:rotate(-2deg);
-    margin-bottom:22px;
 }
 
 .photo-frame img{
@@ -217,306 +237,11 @@ body::before{
     border-radius:12px;
 }
 
-/* Typing */
+/* TYPING */
 
 #typing-text{
-    max-width:340px;
     color:white;
+    max-width:340px;
     text-align:center;
     line-height:1.8;
-    font-size:14px;
-    min-height:180px;
-}
-
-/* Gallery */
-
-.gallery{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    margin-top:22px;
-    padding-bottom:8px;
-    max-width:90%;
-}
-
-.gallery img{
-    width:110px;
-    height:145px;
-    object-fit:cover;
-    border-radius:14px;
-    border:2px solid white;
-}
-
-/* Button */
-
-.btn{
-    margin-top:28px;
-    border:none;
-    padding:11px 25px;
-    border-radius:30px;
-    font-weight:600;
-    background:white;
-    color:#ff758c;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.btn:hover{
-    transform:scale(1.05);
-}
-
-/* Random Love Buttons */
-
-#love-container{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:999;
-}
-
-.love-btn{
-    position:absolute;
-    padding:9px 16px;
-    border:none;
-    border-radius:999px;
-    background:white;
-    color:#ff758c;
-    font-weight:600;
-    cursor:pointer;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-    animation:popIn 0.4s ease;
-    pointer-events:auto;
-    transition:0.3s;
-    will-change:transform;
-}
-
-.love-btn:hover{
-    transform:scale(1.08);
-}
-
-@keyframes popIn{
-    from{
-        transform:scale(0);
-        opacity:0;
-    }
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
-
-</style>
-</head>
-<body>
-
-<!-- MUSIC -->
-<audio id="bg-music" loop>
-    <source src="lagu.mp3" type="audio/mpeg">
-</audio>
-
-<!-- HEARTS -->
-<div id="heart-bg"></div>
-
-<!-- ENVELOPE -->
-<div class="envelope-wrapper" id="envelope">
-
-    <div class="letter">
-        <h2>Untuk Mela 💌</h2>
-        <p>Klik lagi buat buka isi hati aku ✨</p>
-    </div>
-
-    <div class="tap-text">
-        tap amplopnya sayang 🤍
-    </div>
-
-</div>
-
-<!-- SECRET CONTENT -->
-<div id="secret-content">
-
-    <h1 class="title">
-        Happy Level Up Sayangku 🎂
-    </h1>
-
-    <div class="photo-frame">
-        <img src="IMG-20260407-WA0017.jpg">
-    </div>
-
-    <p id="typing-text"></p>
-
-    <div class="gallery">
-        <img src="IMG-20260407-WA0017.jpg">
-        <img src="foto2.jpg">
-        <img src="foto3.jpg">
-        <img src="foto4.jpg">
-    </div>
-
-    <button class="btn" onclick="location.reload()">
-        Ulangi Lagi 💞
-    </button>
-
-</div>
-
-<!-- LOVE BUTTONS -->
-<div id="love-container"></div>
-
-<!-- CONFETTI -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<script>
-
-/* Floating Hearts */
-
-function createHeart(){
-
-    const heart = document.createElement('div');
-
-    heart.classList.add('heart');
-
-    const emojis = ['💗','💖','💕'];
-
-    heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
-
-    heart.style.left = Math.random()*100 + 'vw';
-
-    heart.style.fontSize = Math.random()*15 + 15 + 'px';
-
-    heart.style.animationDuration = Math.random()*3 + 4 + 's';
-
-    document.getElementById('heart-bg').appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },7000);
-
-}
-
-setInterval(createHeart,500);
-
-/* Envelope */
-
-const envelope = document.getElementById('envelope');
-
-let opened = false;
-
-envelope.addEventListener('click',()=>{
-
-    document.getElementById('bg-music').play();
-
-    if(!opened){
-
-        envelope.classList.add('open');
-
-        opened = true;
-
-    }else{
-
-        document.getElementById('secret-content').style.display='flex';
-
-        startTyping();
-
-        confetti({
-            particleCount:120,
-            spread:100,
-            origin:{y:0.6}
-        });
-
-        setInterval(createLoveButton,2500);
-
-    }
-
-});
-
-/* Typing */
-
-const message = `
-Happy level up sayangku cintaku 💞
-
-Ga kerasa ya sekarang kamu udah 21.
-Makasih udah bertahan sejauh ini,
-udah jadi orang baik buat banyak orang,
-dan udah hadir di hidup aku.
-
-Aku harap di umur yang baru ini,
-hal-hal baik makin sering dateng ke kamu.
-Semoga semua yang kamu cari pelan-pelan ketemu,
-dan semua sedih yang pernah lewat bisa terganti
-sama bahagia yang lebih besar.
-
-Please keep smiling,
-because your smile still becomes
-one of my favorite things in this world 🤍
-`;
-
-let i = 0;
-
-function startTyping(){
-
-    const typingText = document.getElementById('typing-text');
-
-    function typing(){
-
-        if(i < message.length){
-
-            typingText.innerHTML += message.charAt(i);
-
-            i++;
-
-            setTimeout(typing,40);
-
-        }
-
-    }
-
-    typing();
-
-}
-
-/* Random Love Buttons */
-
-function createLoveButton(){
-
-    const btn = document.createElement('button');
-
-    btn.classList.add('love-btn');
-
-    const texts = [
-        'I Love You 💖',
-        'Cintaku 💞',
-        'Sayangku 🤍',
-        'My Bini 😛'
-    ];
-
-    btn.innerHTML = texts[Math.floor(Math.random()*texts.length)];
-
-    btn.style.left = Math.random()*75 + 'vw';
-
-    btn.style.top = Math.random()*75 + 'vh';
-
-    document.getElementById('love-container').appendChild(btn);
-
-    btn.addEventListener('click',()=>{
-
-        confetti({
-            particleCount:40,
-            spread:80
-        });
-
-        btn.innerHTML = '💖';
-
-        setTimeout(()=>{
-            btn.remove();
-        },400);
-
-    });
-
-    setTimeout(()=>{
-        btn.remove();
-    },4500);
-
-}
-
-</script>
-
-</body>
-</html>
+    font-size:14
