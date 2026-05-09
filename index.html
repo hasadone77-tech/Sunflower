@@ -26,36 +26,12 @@ body{
     font-family:'Poppins',sans-serif;
     height:100vh;
     overflow:hidden;
-    background:black;
+    background:linear-gradient(135deg,var(--pink1),var(--pink2));
     display:flex;
     justify-content:center;
     align-items:center;
     position:relative;
     -webkit-tap-highlight-color: transparent;
-}
-
-/* VIDEO BACKGROUND */
-
-#bg-video{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-3;
-    opacity:0;
-    transition:1.5s ease;
-}
-
-/* DARK OVERLAY */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.45);
-    z-index:-2;
-    opacity:0;
-    transition:1.5s;
 }
 
 /* GLOW */
@@ -244,4 +220,290 @@ body::before{
     max-width:340px;
     text-align:center;
     line-height:1.8;
-    font-size:14
+    font-size:14px;
+    min-height:180px;
+    text-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+/* GALLERY */
+
+.gallery{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    margin-top:20px;
+    max-width:90%;
+    padding-bottom:10px;
+}
+
+.gallery img{
+    width:110px;
+    height:145px;
+    object-fit:cover;
+    border-radius:14px;
+    border:2px solid white;
+}
+
+/* LOVE BUTTONS */
+
+#love-container{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+}
+
+.love-btn{
+    position:absolute;
+    padding:9px 16px;
+    border:none;
+    border-radius:999px;
+    background:white;
+    color:#ff758c;
+    font-weight:600;
+    cursor:pointer;
+    pointer-events:auto;
+    animation:popIn 0.4s ease;
+}
+
+@keyframes popIn{
+    from{
+        transform:scale(0);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* BUTTON */
+
+.btn{
+    margin-top:25px;
+    border:none;
+    padding:11px 25px;
+    border-radius:999px;
+    background:white;
+    color:#ff758c;
+    font-weight:600;
+    cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<!-- MUSIC -->
+<audio id="bg-music" loop>
+    <source src="Ini Abadi Perunggu.m4a" type="audio/mp4">
+</audio>
+
+<!-- HEARTS -->
+<div id="heart-bg"></div>
+
+<!-- ENVELOPE -->
+<div class="envelope-wrapper" id="envelope">
+
+    <div class="letter">
+        <h2>Untuk Mela 💌</h2>
+        <p>klik lagi buat buka isi hati aku ✨</p>
+    </div>
+
+    <div class="tap-text">
+        tap amplopnya sayang 🤍
+    </div>
+
+</div>
+
+<!-- SECRET -->
+<div id="secret-content">
+
+    <h1 class="title">
+        Happy Level Up Sayangku 🎂
+    </h1>
+
+    <div class="photo-frame">
+        <img src="IMG-20260407-WA0017.jpg">
+    </div>
+
+    <p id="typing-text"></p>
+
+    <div class="gallery">
+        <img src="IMG-20260426-WA0050.jpg">
+        <img src="IMG-20260415-WA0009.jpg">
+        <img src="IMG-20260407-WA0017.jpg">
+    </div>
+
+    <button class="btn" onclick="location.reload()">
+        Replay 💞
+    </button>
+
+</div>
+
+<div id="love-container"></div>
+
+<!-- CONFETTI -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+/* HEARTS */
+
+function createHeart(){
+
+    const heart = document.createElement('div');
+
+    heart.classList.add('heart');
+
+    const emojis = ['💖','💕','💞'];
+
+    heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+
+    heart.style.left = Math.random()*100 + 'vw';
+
+    heart.style.fontSize = Math.random()*15 + 15 + 'px';
+
+    heart.style.animationDuration = Math.random()*3 + 4 + 's';
+
+    document.getElementById('heart-bg').appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },7000);
+
+}
+
+setInterval(createHeart,500);
+
+/* ENVELOPE */
+
+const envelope = document.getElementById('envelope');
+
+let opened = false;
+
+envelope.addEventListener('click',()=>{
+
+    const music = document.getElementById('bg-music');
+
+    music.currentTime = 33;
+
+    music.play();
+
+    if(!opened){
+
+        envelope.classList.add('open');
+
+        opened = true;
+
+    }else{
+
+        document.getElementById('secret-content').style.display='flex';
+
+        startTyping();
+
+        confetti({
+            particleCount:120,
+            spread:100,
+            origin:{y:0.6}
+        });
+
+        setInterval(createLoveButton,2500);
+
+    }
+
+});
+
+/* TYPING */
+
+const message = `
+Happy level up sayangku cintaku 💞
+
+Ga kerasa ya sekarang kamu udah 21.
+Makasih udah bertahan sejauh ini,
+udah jadi orang baik buat banyak orang,
+dan udah hadir di hidup aku.
+
+Aku harap di umur yang baru ini,
+hal-hal baik makin sering dateng ke kamu.
+Semoga semua yang kamu cari pelan-pelan ketemu,
+dan semua sedih yang pernah lewat bisa terganti
+sama bahagia yang lebih besar.
+
+Please keep smiling,
+because your smile still becomes
+one of my favorite things in this world 🤍
+`;
+
+let i = 0;
+
+function startTyping(){
+
+    const typingText = document.getElementById('typing-text');
+
+    function typing(){
+
+        if(i < message.length){
+
+            typingText.innerHTML += message.charAt(i);
+
+            i++;
+
+            setTimeout(typing,40);
+
+        }
+
+    }
+
+    typing();
+
+}
+
+/* RANDOM LOVE BUTTONS */
+
+function createLoveButton(){
+
+    const btn = document.createElement('button');
+
+    btn.classList.add('love-btn');
+
+    const texts = [
+        'I Love You 💖',
+        'Sayangkuu 🤍',
+        'My bini',
+        'Mwah 😚'
+    ];
+
+    btn.innerHTML = texts[Math.floor(Math.random()*texts.length)];
+
+    btn.style.left = Math.random()*75 + 'vw';
+
+    btn.style.top = Math.random()*75 + 'vh';
+
+    document.getElementById('love-container').appendChild(btn);
+
+    btn.addEventListener('click',()=>{
+
+        confetti({
+            particleCount:40,
+            spread:80
+        });
+
+        btn.innerHTML = '💖';
+
+        setTimeout(()=>{
+            btn.remove();
+        },400);
+
+    });
+
+    setTimeout(()=>{
+        btn.remove();
+    },4500);
+
+}
+
+</script>
+
+</body>
+</html>
